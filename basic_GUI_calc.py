@@ -15,7 +15,7 @@ txtpadframe.pack(fill=BOTH,expand=True)
 numpad_frame = LabelFrame(window,text="number pad")
 numpad_frame.pack(pady=(5,20),padx=(20,350),fill=BOTH, expand=True)
 
-value=IntVar
+value=IntVar()
 
 # to configrire the buttons 
 numpad_frame.grid_propagate(False)  # Prevents widgets from auto-expanding
@@ -29,15 +29,18 @@ numpad_frame.grid_columnconfigure(3, weight=1)
 ############################## functions #####################################################
 def button1():
     global value
-    value = 1 
+    value.set(1)
+    txtbox.insert(0, str(value.get()))
 
 def button2():
     global value
-    value = 2
-
+    value.set(2)
+    txtbox.insert(0, str(value.get()))
+    
 def button3():
     global value
-    value = 3
+    value.set(3)
+    txtbox.insert(0, str(value.get()))
 
 def multiplication():       #functions involving logics#
     pass
@@ -65,35 +68,41 @@ def square():
 
 def equalto():
     pass
-
+                         #functions involving logics#
 def button4():
     global value
-    value = 4
+    value.set(4)
+    txtbox.insert(0, str(value.get()))
 
 def button5():
     global value
-    value = 5
+    value.set(5)
+    txtbox.insert(0, str(value.get()))
 
 def button6():
     global value
-    value = 6
+    value.set(6)
+    txtbox.insert(0, str(value.get()))
 
 def button7():
     global value
-    value = 7
+    value.set(7)
+    txtbox.insert(0, str(value.get()))
 
 def button8():
     global value
-    value = 8
+    value.set(8)
+    txtbox.insert(0, str(value.get()))
 
 def button9():
     global value
-    value = 9
+    value.set(9)
+    txtbox.insert(0, str(value.get()))
 
 def button0():
     global value
-    value = 0
-
+    value.set(1)
+    txtbox.insert(0, str(value.get()))
 ############################## functions #####################################################
 
 
@@ -169,5 +178,5 @@ txtbox.pack(ipady=10)
 
 ############################## Entry box #####################################################
 
-
+print(value)
 window.mainloop()
