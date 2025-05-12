@@ -2,9 +2,19 @@ import tkinter as tk
 from tkinter import *
 window = tk.Tk()
 window.title("SIMPLE CALCULATOR")
-window.geometry("500x500")
+
+screen_width = window.winfo_screenwidth()
+screen_height = window.winfo_screenheight() 
+
+window.geometry(f"{screen_width}x{screen_height}")
+
+
+txtpadframe = Frame(window,height=500,width=500)
+txtpadframe.pack(fill=BOTH,expand=True)
+
 numpad_frame = LabelFrame(window,text="number pad")
-numpad_frame.pack(pady=100, fill=BOTH, expand=True)
+numpad_frame.pack(pady=(5,20),padx=(20,350),fill=BOTH, expand=True)
+
 value=IntVar
 
 # to configrire the buttons 
@@ -29,7 +39,31 @@ def button3():
     global value
     value = 3
 
-def multiplication():
+def multiplication():       #functions involving logics#
+    pass
+
+def divison():
+    pass
+
+def addition():
+    pass
+
+def subraction():
+    pass
+
+def clear():
+    pass
+
+def clearall():
+    pass
+
+def sqroot():
+    pass
+
+def square():
+    pass
+
+def equalto():
     pass
 
 def button4():
@@ -85,6 +119,9 @@ b_5.grid(row=2, column=2,padx=30,pady=10, sticky="nsew")
 b_6 = Button(numpad_frame,text="6",width=8,height=3,command=button6)
 b_6.grid(row=2, column=3,padx=30,pady=10, sticky="nsew")
 
+b_6 = Button(numpad_frame,text="/",width=8,height=3,command=divison)
+b_6.grid(row=2, column=4,padx=30,pady=10, sticky="nsew")
+
 b_7 = Button(numpad_frame,text="7",width=8,height=3,command=button7)
 b_7.grid(row=3, column=1,padx=30,pady=10, sticky="nsew")
 
@@ -94,9 +131,43 @@ b_8.grid(row=3, column=2,padx=30,pady=10, sticky="nsew")
 b_9 = Button(numpad_frame,text="9",width=8,height=3,command=button9)
 b_9.grid(row=3, column=3,padx=30,pady=10, sticky="nsew")
 
+b_9 = Button(numpad_frame,text="+",width=8,height=3,command=addition)
+b_9.grid(row=3, column=4,padx=30,pady=10, sticky="nsew")
+
+
 b_0 = Button(numpad_frame,text="0",width=8,height=3,command=button0)
 b_0.grid(row=4, column=2,padx=30,pady=10, sticky="nsew")
+
+
+b_clear = Button(numpad_frame,text="C",width=8,height=3,command=clear)
+b_clear.grid(row=4, column=3,padx=30,pady=10, sticky="nsew")
+
+b_clearall = Button(numpad_frame,text="CE",width=8,height=3,command=clearall)
+b_clearall.grid(row=4, column=1,padx=30,pady=10, sticky="nsew")
+
+b_sub = Button(numpad_frame,text="-",width=8,height=3,command=subraction)
+b_sub.grid(row=4, column=4,padx=30,pady=10, sticky="nsew")
+
+b_sqroot = Button(numpad_frame,text="x^1/2",width=8,height=3,command=sqroot)
+b_sqroot.grid(row=5, column=1,padx=30,pady=10, sticky="nsew")
+
+b_square = Button(numpad_frame,text="x^2",width=8,height=3,command=square)
+b_square.grid(row=5, column=2,padx=30,pady=10, sticky="nsew")
+
+b_dot = Button(numpad_frame,text=".",width=8,height=3,command=subraction)
+b_dot.grid(row=5, column=3,padx=30,pady=10, sticky="nsew")
+
+b_equalto = Button(numpad_frame,text="=",width=8,height=3,command=equalto)
+b_equalto.grid(row=5, column=4,padx=30,pady=10, sticky="nsew")
 ################################ buttons #####################################################
+
+
+############################## Entry box #####################################################
+txtbox = Entry(txtpadframe,width=100,font=('times',50))
+txtbox.pack(ipady=10)
+
+
+############################## Entry box #####################################################
 
 
 window.mainloop()
