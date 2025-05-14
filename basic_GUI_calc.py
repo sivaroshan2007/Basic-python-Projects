@@ -1,5 +1,7 @@
 import tkinter as tk
 from tkinter import *
+from tkinter import ttk 
+
 window = tk.Tk()
 window.title("SIMPLE CALCULATOR")
 
@@ -9,20 +11,33 @@ screen_height = window.winfo_screenheight()
 window.geometry(f"{screen_width}x{screen_height}")
 
 
-txtpadframe = Frame(window,height=500,width=500)
+txtpadframe = Frame(window,height=50,width=600)
 txtpadframe.pack(fill=BOTH,expand=True)
 
 numpad_frame = LabelFrame(window,text="number pad")
-numpad_frame.pack(pady=(5,20),padx=(20,350),fill=BOTH, expand=True)
+numpad_frame.pack(pady=(5,20),padx=(20,350),anchor='ne',expand=True,fill='both')
+#numpad_frame.config(width=30, height=800)
+
+for i in range(6):  # Assuming 6 rows
+    numpad_frame.grid_rowconfigure(i, weight=2)
+for j in range(5):  # Assuming 4 columns
+    numpad_frame.grid_columnconfigure(j, weight=2)
+
+
+
+history_frame = LabelFrame(window,text='History',height=600)
+history_frame.pack(padx=(20,20),pady=(10,10),anchor='ne')
+history_frame.config(height=600,width=30)
+
 
 value=IntVar()
 
 # to configrire the buttons 
 numpad_frame.grid_propagate(False)  # Prevents widgets from auto-expanding
 numpad_frame.grid_rowconfigure(0, weight=1)  
-numpad_frame.grid_rowconfigure(1, weight=1)  # Set reasonable min size
-numpad_frame.grid_columnconfigure(2, weight=1)
-numpad_frame.grid_columnconfigure(3, weight=1)
+numpad_frame.grid_rowconfigure(0, weight=1)  # Set reasonable min size
+numpad_frame.grid_columnconfigure(0, weight=1)
+numpad_frame.grid_columnconfigure(0, weight=1)
 
 
 
@@ -30,17 +45,17 @@ numpad_frame.grid_columnconfigure(3, weight=1)
 def button1():
     global value
     value.set(1)
-    txtbox.insert(0, str(value.get()))
+    txtbox.insert(10, str(value.get()))
 
 def button2():
     global value
     value.set(2)
-    txtbox.insert(0, str(value.get()))
+    txtbox.insert(10, str(value.get()))
     
 def button3():
     global value
     value.set(3)
-    txtbox.insert(0, str(value.get()))
+    txtbox.insert(10, str(value.get()))
 
 def multiplication():       #functions involving logics#
     pass
@@ -72,43 +87,43 @@ def equalto():
 def button4():
     global value
     value.set(4)
-    txtbox.insert(0, str(value.get()))
+    txtbox.insert(10, str(value.get()))
 
 def button5():
     global value
     value.set(5)
-    txtbox.insert(0, str(value.get()))
+    txtbox.insert(10, str(value.get()))
 
 def button6():
     global value
     value.set(6)
-    txtbox.insert(0, str(value.get()))
+    txtbox.insert(10, str(value.get()))
 
 def button7():
     global value
     value.set(7)
-    txtbox.insert(0, str(value.get()))
+    txtbox.insert(10, str(value.get()))
 
 def button8():
     global value
     value.set(8)
-    txtbox.insert(0, str(value.get()))
+    txtbox.insert(10, str(value.get()))
 
 def button9():
     global value
     value.set(9)
-    txtbox.insert(0, str(value.get()))
+    txtbox.insert(10, str(value.get()))
 
 def button0():
     global value
-    value.set(1)
-    txtbox.insert(0, str(value.get()))
+    value.set(0)
+    txtbox.insert(10, str(value.get()))
 ############################## functions #####################################################
 
 
 ############################### buttons ######################################################
 b_1 = Button(numpad_frame, text="1",width=8,height=3,command=button1) 
-b_1.grid(row=1, column=1,padx=30, sticky="nsew")
+b_1.grid(row=1, column=1,padx=30,sticky="nsew")
 
 b_2 = Button(numpad_frame,text="2",width=8,height=3,command=button2)
 b_2.grid(row=1, column=2,padx=30, sticky="nsew")
@@ -175,8 +190,8 @@ b_equalto.grid(row=5, column=4,padx=30,pady=10, sticky="nsew")
 txtbox = Entry(txtpadframe,width=100,font=('times',50))
 txtbox.pack(ipady=10)
 
-
+history_box = ttk.Treeview(history_frame,height=300)
+history_box.pack(ipady=600,padx=(20,20),pady=(10,10),anchor='ne')
 ############################## Entry box #####################################################
 
-print(value)
 window.mainloop()
