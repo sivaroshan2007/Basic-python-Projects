@@ -34,6 +34,7 @@ history_frame.config(height=600,width=30)
 
 
 value=IntVar()
+entry_text = tk.StringVar()
 
 # to configrire the buttons 
 window.grid_rowconfigure(1, weight=1)
@@ -46,23 +47,30 @@ numpad_frame.grid_rowconfigure(0, weight=1)  # Set reasonable min size
 numpad_frame.grid_columnconfigure(0, weight=1)
 numpad_frame.grid_columnconfigure(0, weight=1)
 
+################################## logical functions ################################################
+def limit_entry(*args):
+    value = entry_text.get()
+    if len(value) > 20:  # Limit to 8 characters
+        entry_text.set(value[:20])  # Trim excess characters
 
+entry_text.trace("w", limit_entry)  # Monitor changes
+################################## logical functions ################################################
 
-############################## functions #####################################################
+############################## functions for buttons #####################################################
 def button1():
     global value
     value.set(1)
-    txtbox.insert(10, str(value.get()))
+    txtbox.insert(20, str(value.get()))
 
 def button2():
     global value
     value.set(2)
-    txtbox.insert(10, str(value.get()))
+    txtbox.insert(20, str(value.get()))
     
 def button3():
     global value
     value.set(3)
-    txtbox.insert(10, str(value.get()))
+    txtbox.insert(20, str(value.get()))
 
 def multiplication():       #functions involving logics#
     pass
@@ -94,38 +102,38 @@ def equalto():
 def button4():
     global value
     value.set(4)
-    txtbox.insert(10, str(value.get()))
+    txtbox.insert(20, str(value.get()))
 
 def button5():
     global value
     value.set(5)
-    txtbox.insert(10, str(value.get()))
+    txtbox.insert(20, str(value.get()))
 
 def button6():
     global value
     value.set(6)
-    txtbox.insert(10, str(value.get()))
+    txtbox.insert(20, str(value.get()))
 
 def button7():
     global value
     value.set(7)
-    txtbox.insert(10, str(value.get()))
+    txtbox.insert(20, str(value.get()))
 
 def button8():
     global value
     value.set(8)
-    txtbox.insert(10, str(value.get()))
+    txtbox.insert(20, str(value.get()))
 
 def button9():
     global value
     value.set(9)
-    txtbox.insert(10, str(value.get()))
+    txtbox.insert(20, str(value.get()))
 
 def button0():
     global value
     value.set(0)
-    txtbox.insert(10, str(value.get()))
-############################## functions #####################################################
+    txtbox.insert(20, str(value.get()))
+############################## functions for buttons  #####################################################
 
 
 ############################### buttons ######################################################
@@ -194,7 +202,8 @@ b_equalto.grid(row=5, column=4,padx=30,pady=10, sticky="nsew")
 
 
 ############################## Entry box #####################################################
-txtbox = Entry(txtpadframe,width=100,font=('times',50))
+#txtbox = Entry(txtpadframe,width=100,font=('times',50))
+txtbox = tk.Entry(txtpadframe, textvariable=entry_text,width=100,font=('times',50))
 txtbox.pack(ipady=10)
 
 history_box = ttk.Treeview(history_frame,height=300)
