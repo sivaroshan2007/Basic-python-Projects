@@ -12,11 +12,13 @@ window.geometry(f"{screen_width}x{screen_height}")
 
 
 txtpadframe = Frame(window,height=50,width=600)
-txtpadframe.pack(fill=BOTH,expand=True)
+#txtpadframe.pack(fill=BOTH,expand=True)
+txtpadframe.grid(row=0, column=0, columnspan=2, sticky="nsew")
 
-numpad_frame = LabelFrame(window,text="number pad")
-numpad_frame.pack(pady=(5,20),padx=(20,350),anchor='ne',expand=True,fill='both')
-#numpad_frame.config(width=30, height=800)
+numpad_frame = LabelFrame(window,text="number pad",width=950)
+#numpad_frame.pack(pady=(5,20),padx=(20,350),anchor='ne',expand=True,fill='both')
+numpad_frame.grid(row=1, column=0, sticky="nsew",padx=(10,20))
+numpad_frame.config(width=950, height=800)
 
 for i in range(6):  # Assuming 6 rows
     numpad_frame.grid_rowconfigure(i, weight=2)
@@ -26,13 +28,18 @@ for j in range(5):  # Assuming 4 columns
 
 
 history_frame = LabelFrame(window,text='History',height=600)
-history_frame.pack(padx=(20,20),pady=(10,10),anchor='ne')
+#history_frame.pack(padx=(20,20),pady=(10,10),anchor='ne')
+history_frame.grid(row=1, column=1, sticky="nsew",padx=(20,20))
 history_frame.config(height=600,width=30)
 
 
 value=IntVar()
 
 # to configrire the buttons 
+window.grid_rowconfigure(1, weight=1)
+window.grid_columnconfigure(2, weight=1)
+window.grid_columnconfigure(1, weight=1)
+
 numpad_frame.grid_propagate(False)  # Prevents widgets from auto-expanding
 numpad_frame.grid_rowconfigure(0, weight=1)  
 numpad_frame.grid_rowconfigure(0, weight=1)  # Set reasonable min size
