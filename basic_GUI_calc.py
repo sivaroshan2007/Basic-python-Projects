@@ -35,6 +35,9 @@ history_frame.config(height=600,width=30)
 
 value=IntVar()
 entry_text = tk.StringVar()
+firstno=IntVar
+secondno=IntVar
+
 
 # to configrire the buttons 
 window.grid_rowconfigure(1, weight=1)
@@ -50,10 +53,12 @@ numpad_frame.grid_columnconfigure(0, weight=1)
 ################################## logical functions ################################################
 def limit_entry(*args):
     value = entry_text.get()
-    if len(value) > 20:  # Limit to 8 characters
+    if len(value) > 20:  # Limit to 20 characters
         entry_text.set(value[:20])  # Trim excess characters
 
-entry_text.trace("w", limit_entry)  # Monitor changes
+entry_text.trace("w", limit_entry)  # Monitor 
+
+
 ################################## logical functions ################################################
 
 ############################## functions for buttons #####################################################
@@ -61,6 +66,7 @@ def button1():
     global value
     value.set(1)
     txtbox.insert(20, str(value.get()))
+    
 
 def button2():
     global value
@@ -73,32 +79,42 @@ def button3():
     txtbox.insert(20, str(value.get()))
 
 def multiplication():       #functions involving logics#
-    pass
+    txtbox.insert(20,"×")
 
 def divison():
-    pass
+    txtbox.insert(20,"÷")
 
 def addition():
-    pass
+    txtbox.insert(20,"+")
 
 def subraction():
-    pass
+    txtbox.insert(20,"-")
 
 def clear():
-    pass
+    txtbox.delete(0,1)
 
 def clearall():
-    pass
+    txtbox.delete(0,20)
 
 def sqroot():
-    pass
+    txtbox.insert(20,"^1/2")
 
-def square():
-    pass
+def power():
+    txtbox.insert(20,"^")
 
 def equalto():
-    pass
-                         #functions involving logics#
+    try:
+        exp = txtbox.get()
+        exp = exp.replace("×", "*")
+        exp = exp.replace("÷", "/")
+        exp = exp.replace("^", "**")
+        result = eval(exp)  # Evaluates the expression
+        txtbox.delete(0, tk.END)  # Clears the entry field
+        txtbox.insert(tk.END, result)  # Displays the result
+    except Exception as e:
+        txtbox.delete(0, tk.END)
+        txtbox.insert(tk.END, "Error")
+                                           #functions involving logics#
 def button4():
     global value
     value.set(4)
@@ -133,6 +149,9 @@ def button0():
     global value
     value.set(0)
     txtbox.insert(20, str(value.get()))
+
+def dot():
+    txtbox.insert(20,".")
 ############################## functions for buttons  #####################################################
 
 
@@ -158,8 +177,8 @@ b_5.grid(row=2, column=2,padx=30,pady=10, sticky="nsew")
 b_6 = Button(numpad_frame,text="6",width=8,height=3,command=button6)
 b_6.grid(row=2, column=3,padx=30,pady=10, sticky="nsew")
 
-b_6 = Button(numpad_frame,text="/",width=8,height=3,command=divison)
-b_6.grid(row=2, column=4,padx=30,pady=10, sticky="nsew")
+b_div = Button(numpad_frame,text="÷",width=8,height=3,command=divison)
+b_div.grid(row=2, column=4,padx=30,pady=10, sticky="nsew")
 
 b_7 = Button(numpad_frame,text="7",width=8,height=3,command=button7)
 b_7.grid(row=3, column=1,padx=30,pady=10, sticky="nsew")
@@ -190,10 +209,10 @@ b_sub.grid(row=4, column=4,padx=30,pady=10, sticky="nsew")
 b_sqroot = Button(numpad_frame,text="x^1/2",width=8,height=3,command=sqroot)
 b_sqroot.grid(row=5, column=1,padx=30,pady=10, sticky="nsew")
 
-b_square = Button(numpad_frame,text="x^2",width=8,height=3,command=square)
-b_square.grid(row=5, column=2,padx=30,pady=10, sticky="nsew")
+b_power = Button(numpad_frame,text="^",width=8,height=3,command=power)
+b_power.grid(row=5, column=2,padx=30,pady=10, sticky="nsew")
 
-b_dot = Button(numpad_frame,text=".",width=8,height=3,command=subraction)
+b_dot = Button(numpad_frame,text=".",width=8,height=3,command=dot)
 b_dot.grid(row=5, column=3,padx=30,pady=10, sticky="nsew")
 
 b_equalto = Button(numpad_frame,text="=",width=8,height=3,command=equalto)
@@ -208,6 +227,7 @@ txtbox.pack(ipady=10)
 
 history_box = ttk.Treeview(history_frame,height=300)
 history_box.pack(ipady=600,padx=(20,20),pady=(10,10),anchor='ne')
+history_box.get_children(txtbox.get())
 ############################## Entry box #####################################################
 
 window.mainloop()
