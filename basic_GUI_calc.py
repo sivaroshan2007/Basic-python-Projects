@@ -4,30 +4,31 @@ from tkinter import ttk
 
 window = tk.Tk()
 window.title("SIMPLE CALCULATOR")
+window.config(bg="#E1F8DC")
 
 screen_width = window.winfo_screenwidth()
 screen_height = window.winfo_screenheight() 
 
-window.geometry(f"{screen_width}x{screen_height}")
-
+window.geometry("1000x500")
+#window.geometry(f"{screen_width}x{screen_height}")
 
 txtpadframe = Frame(window,height=50,width=600)
 #txtpadframe.pack(fill=BOTH,expand=True)
 txtpadframe.grid(row=0, column=0, columnspan=2, sticky="nsew")
 
-numpad_frame = LabelFrame(window,text="number pad",width=950)
+numpad_frame = LabelFrame(window,text="number pad",width=950,bg="#E1F8DC")
 #numpad_frame.pack(pady=(5,20),padx=(20,350),anchor='ne',expand=True,fill='both')
 numpad_frame.grid(row=1, column=0, sticky="nsew",padx=(10,20))
 numpad_frame.config(width=950, height=800)
 
 for i in range(6):  # Assuming 6 rows
     numpad_frame.grid_rowconfigure(i, weight=2)
-for j in range(5):  # Assuming 4 columns
+for j in range(5):  # Assuming 5 columns
     numpad_frame.grid_columnconfigure(j, weight=2)
 
 
 
-history_frame = LabelFrame(window,text='History',height=600)
+history_frame = LabelFrame(window,text='History',height=600,bg="#E1F8DC")
 #history_frame.pack(padx=(20,20),pady=(10,10),anchor='ne')
 history_frame.grid(row=1, column=1, sticky="nsew",padx=(20,20))
 history_frame.config(height=600,width=30)
@@ -111,6 +112,11 @@ def equalto():
         result = eval(exp)  # Evaluates the expression
         txtbox.delete(0, tk.END)  # Clears the entry field
         txtbox.insert(tk.END, result)  # Displays the result
+        exp = exp.replace("*", "×")
+        exp = exp.replace("/", "÷")
+        exp = exp.replace("××", "^")
+        history_box.insert("", "end", values=(exp, result))
+        history_box.yview_moveto(1)
     except Exception as e:
         txtbox.delete(0, tk.END)
         txtbox.insert(tk.END, "Error")
@@ -156,78 +162,89 @@ def dot():
 
 
 ############################### buttons ######################################################
-b_1 = Button(numpad_frame, text="1",width=8,height=3,command=button1) 
+b_1 = Button(numpad_frame, text="1",width=8,height=3,command=button1,bg="#CAF1DE") 
 b_1.grid(row=1, column=1,padx=30,sticky="nsew")
 
-b_2 = Button(numpad_frame,text="2",width=8,height=3,command=button2)
+b_2 = Button(numpad_frame,text="2",width=8,height=3,command=button2,bg="#CAF1DE")
 b_2.grid(row=1, column=2,padx=30, sticky="nsew")
 
-b_3 = Button(numpad_frame,text="3",width=8,height=3,command=button3)
+b_3 = Button(numpad_frame,text="3",width=8,height=3,command=button3,bg="#CAF1DE")
 b_3.grid(row=1, column=3,padx=30, sticky="nsew")
 
-b_mul = Button(numpad_frame,text="X",width=8,height=3,command=multiplication)
+b_mul = Button(numpad_frame,text="X",width=8,height=3,command=multiplication,bg="#CAF1DE")
 b_mul.grid(row=1, column=4,padx=30, sticky="nsew")
 
-b_4 = Button(numpad_frame,text="4",width=8,height=3,command=button4)
+b_4 = Button(numpad_frame,text="4",width=8,height=3,command=button4,bg="#CAF1DE")
 b_4.grid(row=2, column=1,padx=30,pady=10, sticky="nsew")
 
-b_5 = Button(numpad_frame,text="5",width=8,height=3,command=button5)
+b_5 = Button(numpad_frame,text="5",width=8,height=3,command=button5,bg="#CAF1DE")
 b_5.grid(row=2, column=2,padx=30,pady=10, sticky="nsew")
 
-b_6 = Button(numpad_frame,text="6",width=8,height=3,command=button6)
+b_6 = Button(numpad_frame,text="6",width=8,height=3,command=button6,bg="#CAF1DE")
 b_6.grid(row=2, column=3,padx=30,pady=10, sticky="nsew")
 
-b_div = Button(numpad_frame,text="÷",width=8,height=3,command=divison)
+b_div = Button(numpad_frame,text="÷",width=8,height=3,command=divison,bg="#CAF1DE")
 b_div.grid(row=2, column=4,padx=30,pady=10, sticky="nsew")
 
-b_7 = Button(numpad_frame,text="7",width=8,height=3,command=button7)
+b_7 = Button(numpad_frame,text="7",width=8,height=3,command=button7,bg="#CAF1DE")
 b_7.grid(row=3, column=1,padx=30,pady=10, sticky="nsew")
 
-b_8 = Button(numpad_frame,text="8",width=8,height=3,command=button8)
+b_8 = Button(numpad_frame,text="8",width=8,height=3,command=button8,bg="#CAF1DE")
 b_8.grid(row=3, column=2,padx=30,pady=10, sticky="nsew")
 
-b_9 = Button(numpad_frame,text="9",width=8,height=3,command=button9)
+b_9 = Button(numpad_frame,text="9",width=8,height=3,command=button9,bg="#CAF1DE")
 b_9.grid(row=3, column=3,padx=30,pady=10, sticky="nsew")
 
-b_9 = Button(numpad_frame,text="+",width=8,height=3,command=addition)
+b_9 = Button(numpad_frame,text="+",width=8,height=3,command=addition,bg="#CAF1DE")
 b_9.grid(row=3, column=4,padx=30,pady=10, sticky="nsew")
 
 
-b_0 = Button(numpad_frame,text="0",width=8,height=3,command=button0)
+b_0 = Button(numpad_frame,text="0",width=8,height=3,command=button0,bg="#CAF1DE")
 b_0.grid(row=4, column=2,padx=30,pady=10, sticky="nsew")
 
 
-b_clear = Button(numpad_frame,text="C",width=8,height=3,command=clear)
+b_clear = Button(numpad_frame,text="C",width=8,height=3,command=clear,bg="#CAF1DE")
 b_clear.grid(row=4, column=3,padx=30,pady=10, sticky="nsew")
 
-b_clearall = Button(numpad_frame,text="CE",width=8,height=3,command=clearall)
+b_clearall = Button(numpad_frame,text="CE",width=8,height=3,command=clearall,bg="#CAF1DE")
 b_clearall.grid(row=4, column=1,padx=30,pady=10, sticky="nsew")
 
-b_sub = Button(numpad_frame,text="-",width=8,height=3,command=subraction)
+b_sub = Button(numpad_frame,text="-",width=8,height=3,command=subraction,bg="#CAF1DE")
 b_sub.grid(row=4, column=4,padx=30,pady=10, sticky="nsew")
 
-b_sqroot = Button(numpad_frame,text="x^1/2",width=8,height=3,command=sqroot)
+b_sqroot = Button(numpad_frame,text="x^1/2",width=8,height=3,command=sqroot,bg="#CAF1DE")
 b_sqroot.grid(row=5, column=1,padx=30,pady=10, sticky="nsew")
 
-b_power = Button(numpad_frame,text="^",width=8,height=3,command=power)
+b_power = Button(numpad_frame,text="^",width=8,height=3,command=power,bg="#CAF1DE")
 b_power.grid(row=5, column=2,padx=30,pady=10, sticky="nsew")
 
-b_dot = Button(numpad_frame,text=".",width=8,height=3,command=dot)
+b_dot = Button(numpad_frame,text=".",width=8,height=3,command=dot,bg="#CAF1DE")
 b_dot.grid(row=5, column=3,padx=30,pady=10, sticky="nsew")
 
-b_equalto = Button(numpad_frame,text="=",width=8,height=3,command=equalto)
+b_equalto = Button(numpad_frame,text="=",width=8,height=3,command=equalto,bg="#CAF1DE")
 b_equalto.grid(row=5, column=4,padx=30,pady=10, sticky="nsew")
 ################################ buttons #####################################################
 
 
 ############################## Entry box #####################################################
 #txtbox = Entry(txtpadframe,width=100,font=('times',50))
-txtbox = tk.Entry(txtpadframe, textvariable=entry_text,width=100,font=('times',50))
+txtbox = tk.Entry(txtpadframe, textvariable=entry_text,width=100,font=('times',50),bg="#FEF8DD")
 txtbox.pack(ipady=10)
 
 history_box = ttk.Treeview(history_frame,height=300)
 history_box.pack(ipady=600,padx=(20,20),pady=(10,10),anchor='ne')
-history_box.get_children(txtbox.get())
+
+history_box["columns"] = ("Expression", "Result")
+history_box.heading("Expression", text="Expression")
+history_box.heading("Result", text="Result")
+#history_box.column("Expression", width=200, stretch=False)
+#history_box.column("Result", width=100, stretch=False)
+history_box.column("Expression", width=100)
+history_box.column("Result", width=100)
+history_box.column("Expression", anchor="w")  # Aligns left
+history_box.column("Result", anchor="w")  # Aligns left
+history_box.column("#0",width=0)
+
 ############################## Entry box #####################################################
 
 window.mainloop()
